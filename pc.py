@@ -1,5 +1,7 @@
 class PC:
     pc = 0
+    def __init__(self):
+        pass
     def __init__(self, val):
         self.pc = val
 
