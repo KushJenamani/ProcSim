@@ -1,6 +1,9 @@
-class mux:
+class Mux:
     def __init__(self, *inputs):
-        self.inputs = inputs
+        self.inputs = inputs;
+    
+    def inputs(self, *inputs):
+        self.inputs = inputs;
 
     def select(self, sel):
         self.sel = sel;

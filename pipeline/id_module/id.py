@@ -21,8 +21,36 @@ class Id:
         func = inst[26:32];
         imm = inst[16:32];
         jimm = inst[6:32];
+
+        self.pc_4 = self.inpipe.pc_4;
     
         self.signalsObject = self._control.decidesignals(opcode, func);
         self.rs = rs;
         self.rt = rt;
         self.rd = rd;
+        self.shamt = shamt;
+        self.imm = imm;
+    
+
+    def output(self):
+        self.outpipe.signalsObject = self.signalsObject;
+        self.outpipe.pc_4 = self.pc_4;
+
+        self.outpipe.rs = self.rs;
+        self.outpipe.rt = self.rt;
+        self.outpipe.rd = self.rd;
+        
+        self.outpipe.imm = self.imm;
+        self.outpipe.shamt = self.shamt;
+
+        self.outpipe.rd1 = self.rd1;
+        self.outpipe.rd2 = self.rd2;
+
+    def decode(self):
+        self.input();
+
+        self.regfile.input(False, self.rs, self.rt, self.rd);
+        self.rd1 = self.regfile.rd1();
+        self.rd2 = self.regfile.rd2();
+
+        self.output();

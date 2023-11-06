@@ -59,6 +59,7 @@ class Alu:
                 num = 2 * num + int(bin[i])
             num -= pow(2, len(bin)-1)
             return num
+        
     def sll(a, b):
         ans = a << b
         #check if msb of a is 1

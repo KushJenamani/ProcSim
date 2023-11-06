@@ -1,3 +1,7 @@
+
+
+'''     CRITICAL CHANGE      '''
+
 import random
 import alu
 class RegFile: 
@@ -29,6 +33,8 @@ class RegFile:
         return self.reg[self.a2];
 
     def write(self, regWrite, datain):
+        self.regWrite = regWrite;       ## MADE A CRUCIAL CHANGE HERE, CONFIRM WITH PRAT
+
         if self.regWrite:
             self.reg[self.a3] = datain
             print("wrote", datain,"to", self.a3)
