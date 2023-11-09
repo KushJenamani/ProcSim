@@ -23,6 +23,17 @@ class SignalsObject:
         self.regwrite = regwrite
         self.mem2reg = mem2reg
 
+    def flush(self):
+        self.branch = False;
+        self.jump = False;
+        self.alusrc = False;
+        self.alucontrol = "";
+        self.memread = False;
+        self.memwrite = False;
+        self.regwrite = False;
+        self.regdst = False;
+        self.mem2reg = False;
+
 
 class Control:
     opcode: str;

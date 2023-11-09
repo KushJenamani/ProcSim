@@ -39,6 +39,8 @@ class InstMemory:
         code = file.readlines()
         for i in range(len(code)):
             self.mem[4194304 + i*4] = code[i];
+        else:
+            self.mem = "EXEC DONE"
         print(len(self.mem))
 
     def getInst(self, pc):

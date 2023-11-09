@@ -1,7 +1,6 @@
-import module;
 from pipeline_register import ifid;
 
-class If (module):
+class If ():
     def __init__(self, pc, inst_mem):
         self.pc = pc;
         self.inst_mem = inst_mem;
@@ -15,3 +14,5 @@ class If (module):
         
         pipe.pc_4 = self.pc;
         
+    def fetch(self):
+        self.output();

@@ -4,9 +4,10 @@ from alu import Alu;
 from control import Control;
 
 class Id:
-    def __init__(self, regfile, inpipe: ifid, outpipe: idex):
+    def __init__(self, regfile, hazard_unit, inpipe: ifid, outpipe: idex):
         self.regfile = regfile;
         self._control = Control();
+        self.hazard_unit = hazard_unit;
         self.inpipe = inpipe;
         self.outpipe = outpipe;
 
@@ -54,3 +55,4 @@ class Id:
         self.rd2 = self.regfile.rd2();
 
         self.output();
+        self.hazard_unit.detect();
