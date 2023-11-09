@@ -12,6 +12,6 @@ class Hazard:
         self.idex.signalsObject.flush();
 
     def detect(self):
-        if (self.idex.signalsObject.memread):
+        if (self.idex.signalsObject and self.idex.signalsObject.memread):
             if (self.ifid.rs == self.idex.rd or self.ifid.rt == self.idex.rd):
                 self.stall()

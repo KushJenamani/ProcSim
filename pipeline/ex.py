@@ -12,44 +12,48 @@ class Ex:
         self.outpipe = outpipe;
 
     def input(self):
-        self.funit.forward();
+        if self.inpipe.signalsObject:
+            self.funit.forward();
 
-        self.rd1 = self.inpipe.rd1;
-        self.rd2 = self.inpipe.rd2;
+            self.rd1 = self.inpipe.rd1;
+            self.rd2 = self.inpipe.rd2;
 
-        # IF WE ENCOUNTER SLL
-        if (self.inpipe.signalsControl.aluop == "1111"):
-            self.rd1 = self.rd2;
-            self.rd2 = self.inpipe.shamt;
+            # IF WE ENCOUNTER SLL
+            if (self.inpipe.signalsControl.aluop == "1111"):
+                self.rd1 = self.rd2;
+                self.rd2 = self.inpipe.shamt;
+            
+            # WHEN IMM FIELD IS TO BE USED
+            if (self.inpipe.signalsControl.aluSrc):
+                self.rd2 = self.inpipe.imm;
+            
+            # ALU ACTION
+            self.res = self.alu(self.rd1, self.rd2, self.inpipe.signalsControl.aluSrc);
+            self.zero = self.alu.getzero();
+
+            # PC ALU ACTION
+            self.pc_res = self.pc_alu(self.pc, self.imm + '00', '0010');
         
-        # WHEN IMM FIELD IS TO BE USED
-        if (self.inpipe.signalsControl.aluSrc):
-            self.rd2 = self.inpipe.imm;
-        
-        # ALU ACTION
-        self.res = self.alu(self.rd1, self.rd2, self.inpipe.signalsControl.aluSrc);
-        self.zero = self.alu.getzero();
-
-        # PC ALU ACTION
-        self.pc_res = self.pc_alu(self.pc, self.imm + '00', '0010');
-    
-        if (self.signalsObject.regdst == True):
-            self.rd = self.inpipe.rd;
-        else:
-            self.rd = self.inpipe.rt;
+            if (self.signalsObject.regdst == True):
+                self.rd = self.inpipe.rd;
+            else:
+                self.rd = self.inpipe.rt;
 
         
 
     def output(self):
-        self.outpipe.signalsObject = self.signalsObject;
+        if self.inpipe.signalsObject:
+            self.outpipe.signalsObject = self.signalsObject;
 
-        self.outpipe.bta = self.res;
+            self.outpipe.bta = self.res;
 
-        self.outpipe.alures = self.res;
-        self.outpipe.aluzero = self.zero;
-        self.outpipe.rd2 = self.inpipe.rd2; # NOT self.rd2, IT CAN BE OVERWRITTEN WITH IMM OR SHAMT..
+            self.outpipe.alures = self.res;
+            self.outpipe.aluzero = self.zero;
+            self.outpipe.rd2 = self.inpipe.rd2; # NOT self.rd2, IT CAN BE OVERWRITTEN WITH IMM OR SHAMT..
 
-        self.outpipe.rd = self.rd;
+            self.outpipe.rd = self.rd;
+        
+            self.outpipe.end = self.inpipe.end;
 
     def execute(self):
         self.input();

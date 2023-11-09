@@ -7,22 +7,35 @@ class Mem:
         self.mem = mem;
         self.exmem = exmem;
         self.memwb = memwb;
+        self.inpipe = inpipe;
+        self.outpipe = outpipe;
         self.branchModule = branchModule;
 
     def input(self):
-        self.mem.inputs(self.inpipe.signalsObject.memread,
-                        self.inpipe.signalsObject.memwrite,
-                        self.inpipe.alures,
-                        self.inpipe.rd2);
-    
-        self.memres = self.mem.output();
-
-        # Branch
-        if (self.inpipe.aluzero and self.inpipe.signalsObject.branch):
-            self.branchModule.branch(self.inpipe.bta);
         
+        if self.inpipe.signalsObject:
+            self.mem.inputs(self.inpipe.signalsObject.memread,
+                            self.inpipe.signalsObject.memwrite,
+                            self.inpipe.alures,
+                            self.inpipe.rd2);
+        
+            self.memres = self.mem.output();
+
+            # Branch
+            if (self.inpipe.aluzero and self.inpipe.signalsObject.branch):
+                self.branchModule.branch(self.inpipe.bta);
+            
 
     def output(self):
-        self.outpipe.memres = self.memres;
-        self.outpipe.rd = self.inpipe.rd;
-        self.outpipe.alures = self.inpipe.alures;
+        
+        if self.inpipe.signalsObject:
+            self.outpipe.signalsControl = self.inpipe.signalsObject;
+            self.outpipe.memres = self.memres;
+            self.outpipe.rd = self.inpipe.rd;
+            self.outpipe.alures = self.inpipe.alures;
+        
+            self.outpipe.end = self.inpipe.end;
+
+    def access(self):
+        self.input();
+        self.output();

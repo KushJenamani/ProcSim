@@ -1,6 +1,6 @@
 class Branch:
     def __init__(self, pc, ifid, idex):
-        self.pc;
+        self.pc = pc;
         self.ifid = ifid;
         self.idex = idex;
 

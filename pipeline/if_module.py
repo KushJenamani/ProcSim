@@ -12,6 +12,7 @@ class If ():
         pipe.inst = self.inst_mem.getInst(self.pc);
         self.pc += 4;
         
+        pipe.end = True;
         pipe.pc_4 = self.pc;
         
     def fetch(self):
