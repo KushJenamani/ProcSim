@@ -18,4 +18,5 @@ class Wb:
     def writeBack(self):
         self.input();
         self.output();
+        print('END GAME ALERT :::::::::::' + str(self.inpipe.end));
         return self.inpipe.end;

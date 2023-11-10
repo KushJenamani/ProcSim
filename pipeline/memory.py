@@ -44,7 +44,10 @@ class InstMemory:
         print('length of inst_mem is; ', len(self.mem))
 
     def getInst(self, pc):
-        return self.mem[pc];
+        if (pc in self.mem):
+            return self.mem[pc];
+        else:
+            return '1' * 32;
 
     
         

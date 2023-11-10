@@ -46,7 +46,7 @@ class Ex:
         if self.inpipe.signalsObject:
             self.outpipe.signalsObject = self.inpipe.signalsObject;
 
-            self.outpipe.bta = self.res;
+            self.outpipe.bta = self.pc_res;
 
             self.outpipe.alures = self.res;
             self.outpipe.aluzero = self.zero;

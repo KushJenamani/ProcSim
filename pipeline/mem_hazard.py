@@ -13,5 +13,5 @@ class Hazard:
 
     def detect(self):
         if (self.idex.signalsObject and self.idex.signalsObject.memread):
-            if (self.ifid.rs == self.idex.rd or self.ifid.rt == self.idex.rd):
+            if (self.ifid.inst[6:11] == self.idex.rd or self.ifid.inst[11:16] == self.idex.rd):
                 self.stall()

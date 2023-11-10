@@ -29,7 +29,7 @@ memWb = memwb();
 
 # create modules internals
 
-filename = 'bytecode.txt'
+filename = 'bytecode copy.txt'
 
 pc = PC(0);
 regfile = RegFile();
@@ -114,7 +114,6 @@ while (True):
     elif (inp == 's'):
         analyse.dumpPipes();
     elif (inp == 'c'):
-        os.system('clear');
         analyse.dumpPipes();
     if (end):
         break;

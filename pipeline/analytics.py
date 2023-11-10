@@ -1,4 +1,40 @@
 class Analytics:
+    regmap = {
+        0: '$zero',
+        1: 'at',
+        2: 'v0',
+        3: 'v1',
+        4: 'a0',
+        5: 'a1',
+        6: 'a2',
+        7: 'a3',
+        8: 't0',
+        9: 't1',
+        10: 't2',
+        11: 't3',
+        12: 't4',
+        13: 't5',
+        14: 't6',
+        15: 't7',
+        16: 's0',
+        17: 's1',
+        18: 's2',
+        19: 's3',
+        20: 's4',
+        21: 's5',
+        22: 's6',
+        23: 's7',
+        24: 't8',
+        25: 't9',
+        26: 'k0',
+        27: 'k1',
+        28: 'gp',
+        29: 'sp',
+        30: 'fp',
+        31: 'ra',
+        '---': ''
+    }
+
     def __init__(self, if_mod, id, ex, mem, wb, ifid, idex, exmem, memwb):
         self.if_mod = if_mod;
         self.id = id;
@@ -111,6 +147,10 @@ class Analytics:
                 case _:
                     print('that instruction does not exist')
                     print('opcode: ', opcode, 'func: ', func)
+
+        operation['rs'] = str(operation['rs']) + ' = ' + self.regmap[operation['rs']];
+        operation['rt'] = str(operation['rt']) + ' = ' + self.regmap[operation['rt']];
+        operation['rd'] = str(operation['rd']) + ' = ' + self.regmap[operation['rd']];
             
         return operation
         

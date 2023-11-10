@@ -15,7 +15,7 @@ class If ():
         print('instruction is: ', self.outpipe.inst)
         self.pc.set(self.pc.get() + 4);
         
-        self.outpipe.end = True;
+        self.outpipe.end = self.outpipe.inst == '0'*32;       # outpipe inst has been intialized in this function before
         self.outpipe.pc_4 = self.pc.get();
         
     def fetch(self):
