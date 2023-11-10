@@ -17,7 +17,7 @@ class idex:
 
         self.rd1 = 0;
         self.rd2 = 0;
-        self.imm = 0;
+        self.imm = '0000000000000000';
         self.shamt = 0;
 
         self.rs = 0;

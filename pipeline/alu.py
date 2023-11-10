@@ -82,7 +82,7 @@ class Alu:
     def alu(self, op1, op2, alucontrol):
         print('alucontrol is: ', alucontrol)
         if(type(op1) != type(1)):
-            print('type of op1 is', type(op1))
+            # print('type of op1 is', type(op1))
             op1 = self.binToInt(op1)
         if(type(op2) != type(1)):
             op2 = self.binToInt(op2)

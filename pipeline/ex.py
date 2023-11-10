@@ -32,8 +32,8 @@ class Ex:
             self.zero = self.alu.getzero();
 
             # PC ALU ACTION
-            print('we passed to the alu: ', self.inpipe.pc_4, self.inpipe.imm*4)
-            self.pc_res = self.pc_alu.alu(self.inpipe.pc_4, self.inpipe.imm * 4, '0010');
+            print('we passed to the alu: ', self.inpipe.pc_4, self.inpipe.imm+'00')
+            self.pc_res = self.pc_alu.alu(self.inpipe.pc_4, self.inpipe.imm + '00', '0010');
         
             if (self.inpipe.signalsObject.regdst == True):
                 self.rd = self.inpipe.rd;
