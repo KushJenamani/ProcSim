@@ -79,12 +79,15 @@ class Alu:
 
     zero: bool;
 
-    def alu(self, op1, op2, aluop):
+    def alu(self, op1, op2, alucontrol):
+        print('alucontrol is: ', alucontrol)
         if(type(op1) != type(1)):
+            print('type of op1 is', type(op1))
             op1 = self.binToInt(op1)
         if(type(op2) != type(1)):
             op2 = self.binToInt(op2)
-        res = (self.exec[aluop])(op1, op2);
+        res = (self.exec[alucontrol])(op1, op2);
+        print('operands: ', op1, op2)
         print("res:", res, "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
         if (res == 0): self.zero = True;
         else: self.zero = False;

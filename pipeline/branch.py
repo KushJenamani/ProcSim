@@ -6,5 +6,6 @@ class Branch:
 
     def branch(self, bta):
         self.pc.set(bta);
-        self.ifid.signalsObject.flush();
+        print('bta: ',bta)
+        self.ifid.inst = '0' * 32;
         self.idex.signalsObject.flush();

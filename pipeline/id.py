@@ -50,7 +50,7 @@ class Id:
             self.outpipe.rd2 = self.rd2;
         
             self.outpipe.end = self.inpipe.end;
-
+            self.outpipe.inst = self.inpipe.inst
     def decode(self):
         self.input();
 

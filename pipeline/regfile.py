@@ -14,15 +14,22 @@ class RegFile:
     def __init__(self):
         for i in range(1, 31):
             self.reg[i] = -1
-
-    def inputs(self, regWrite, a1, a2, a3, datain  = 0):
+        self.alu = alu.Alu()
+        self.a1 = 0
+        self.a2 = 0
+        self.a3 = 0
+        self.regWrite = False
+    def inputs(self, regWrite, a1, a2, a3, datain  = 0): # a1, a2 and a3 need to be integers after they come here
         self.regWrite = regWrite;
-        self.a1 = a1;
-        self.a2 = a2;
-        self.a3 = a3;
+        if(type(a1) != type(1)):
+            self.a1 = self.alu.binToInt(a1);
+        if(type(a2) != type(1)):
+            self.a2 = self.alu.binToInt(a2);
+        if(type(a3) != type(1)):
+            self.a3 = self.alu.binToInt(a3);
     
         if self.regWrite:
-            self.reg[a3] = datain
+            self.reg[self.a3] = datain
             print("wrote", datain,"to", self.a3)
 
         
@@ -32,7 +39,7 @@ class RegFile:
     def rd2(self):
         return self.reg[self.a2];
 
-    def write(self, regWrite, datain):
+    def write(self, regWrite, datain, a3 = 0):
         self.regWrite = regWrite;       ## MADE A CRUCIAL CHANGE HERE, CONFIRM WITH PRAT
 
         if self.regWrite:

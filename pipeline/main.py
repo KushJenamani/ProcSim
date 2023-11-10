@@ -1,6 +1,5 @@
-import sys;
+import os;
 
-sys.path.insert(0, 'C:\\Users\\HP\\Documents\\iiitb\\\'New Folder\'\\CPU_coa\\');
 from if_module import If;
 from id import Id;
 from ex import Ex;
@@ -17,6 +16,8 @@ from regfile import RegFile;
 from forward_unit import Funit;
 from mem_hazard import Hazard;
 from branch import Branch;
+
+from analytics import Analytics;
 
 
 
@@ -45,13 +46,13 @@ branch_unit = Branch(pc, ifId, idEx);
 
 
 #create modules
-if_mod = If(pc, instMem);
+if_mod = If(pc, instMem, ifId);
 id = Id(regfile, hazard_unit, ifId, idEx);
 ex = Ex(alu, pc_alu, forward_unit, idEx, exMem);
 mem = Mem(dataMem, branch_unit, exMem, memWb);
 wb = Wb(regfile, memWb);
 
-
+analyse = Analytics(if_mod, id, ex, mem, wb, ifId, idEx, exMem, memWb);
 
 
 
@@ -94,23 +95,26 @@ pc.set(4194304)  # initialize pc to the first instruction in codespace
 
 
 
-
-
-
-
-
-
 # EXECUTE
 while (True):
-    print('Something vro')
     end = wb.writeBack();
     mem.access();
     ex.execute();
     id.decode();
+
     try:
         if_mod.fetch();
     except:
         pass
 
+    
+    inp = input()
+    if (inp == 'n'):
+        continue
+    elif (inp == 's'):
+        analyse.dumpPipes();
+    elif (inp == 'c'):
+        os.system('clear');
+        analyse.dumpPipes();
     if (end):
         break;

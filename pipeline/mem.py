@@ -5,8 +5,8 @@ from memory import DataMemory;
 class Mem:
     def __init__(self, mem: DataMemory, branchModule, inpipe: exmem, outpipe: memwb):
         self.mem = mem;
-        self.exmem = exmem;
-        self.memwb = memwb;
+        self.exmem = inpipe;
+        self.memwb = outpipe;
         self.inpipe = inpipe;
         self.outpipe = outpipe;
         self.branchModule = branchModule;
@@ -29,12 +29,14 @@ class Mem:
     def output(self):
         
         if self.inpipe.signalsObject:
-            self.outpipe.signalsControl = self.inpipe.signalsObject;
+            self.outpipe.signalsObject = self.inpipe.signalsObject;
             self.outpipe.memres = self.memres;
             self.outpipe.rd = self.inpipe.rd;
             self.outpipe.alures = self.inpipe.alures;
         
             self.outpipe.end = self.inpipe.end;
+            self.outpipe.inst = self.inpipe.inst
+        print('mem done for', self.inpipe.inst)
 
     def access(self):
         self.input();

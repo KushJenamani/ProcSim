@@ -27,7 +27,7 @@ class SignalsObject:
         self.branch = False;
         self.jump = False;
         self.alusrc = False;
-        self.alucontrol = "";
+        self.alucontrol = '0000';
         self.memread = False;
         self.memwrite = False;
         self.regwrite = False;
@@ -88,9 +88,11 @@ class Control:
                     return SignalsObject(regdst=False, regwrite= False, alusrc=True, alucontrol='0010', mem2reg=False, memread=False, memwrite=True, jump=False, branch=False)
                 case '000100':
                     # it is a beq
+                    print('it is beq')
                     return SignalsObject(regdst=False, regwrite= False, alusrc=False, alucontrol='0110', mem2reg=False, memread=False, memwrite=True, jump=False, branch=True)
                 case '000101':
                     # it is a bne
+                    print('it is bne')
                     return SignalsObject(regdst=False, regwrite= False, alusrc=False, alucontrol='0110', mem2reg=False, memread=False, memwrite=True, jump=False, branch=True)
                 case '000010':
                     # it is a j

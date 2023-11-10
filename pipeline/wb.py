@@ -6,14 +6,14 @@ class Wb:
 
     def input(self):
         if self.inpipe.signalsObject:
-            if (self.inpipe.signalsControl.mem2reg == True):
+            if (self.inpipe.signalsObject.mem2reg == True):
                 self.result = self.inpipe.memres;
             else:
                 self.result = self.inpipe.alures;
 
     def output(self):
-        if self.inpipe.signalsObject:
-            self.regfile.write(self.inpipe.regdst, self.result);
+        if self.inpipe.signalsObject and self.inpipe.rd != 0:
+            self.regfile.write(self.inpipe.signalsObject.regdst, self.result, self.inpipe.rd);
 
     def writeBack(self):
         self.input();
