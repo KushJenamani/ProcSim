@@ -32,9 +32,9 @@ class Ex:
             self.zero = self.alu.getzero();
 
             # PC ALU ACTION
-            print('HERE IS YOUR IMM \n \n' + self.inpipe.imm);
-            print('we passed to the alu: ', self.inpipe.pc_4, self.inpipe.imm * 4)
-            self.pc_res = self.pc_alu.alu(self.inpipe.pc_4, self.inpipe.imm * 4, '0010');
+            print('HERE IS YOUR IMM \n \n' + str(type(self.inpipe.imm)));
+            print('we passed to the alu: ', self.inpipe.pc_4, self.inpipe.imm + '00')
+            self.pc_res = self.pc_alu.alu(self.inpipe.pc_4, self.inpipe.imm + '00', '0010');
         
             if (self.inpipe.signalsObject.regdst == True):
                 self.rd = self.inpipe.rd;
@@ -48,6 +48,7 @@ class Ex:
             self.outpipe.signalsObject = self.inpipe.signalsObject;
 
             self.outpipe.bta = self.pc_res;
+            print("BTA: " + str(self.outpipe.bta));
 
             self.outpipe.alures = self.res;
             self.outpipe.aluzero = self.zero;

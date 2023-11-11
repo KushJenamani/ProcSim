@@ -83,6 +83,7 @@ for i in range(n):
     inp.append(a);
     # the numbers must also be stored at the starting address
     dataMem.inputs(memRead=False, memWrite=True, address=start_addr+i*4, datain=a)
+    
 
 
 # now instruction memory has all the instructions 

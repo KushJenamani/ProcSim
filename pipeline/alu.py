@@ -43,22 +43,35 @@ class Alu:
     #     return factor * num
     
     def binToInt(self, bin:str):
-        factor = 1
-        #treat all immidiates as signed 2s complement and opcodes and other stuff as unsigned
-        if (bin[0] != '1' or len(bin) < 16):
-            factor = +1  # changes made here
-            num = 0
-            for i in range(0, len(bin)):
-                num = 2 * num + int(bin[i])  # changes made here
+        # factor = 1
+        # #treat all immidiates as signed 2s complement and opcodes and other stuff as unsigned
+        # if (bin[0] != '1' or len(bin) < 16):
+        #     factor = +1  # changes made here
+        #     num = 0
+        #     for i in range(0, len(bin)):
+        #         num = 2 * num + int(bin[i])  # changes made here
 
-            return factor * num
+        #     return factor * num
+        # else:
+        #     # print('here')
+        #     num = 0
+        #     for i in range(0, len(bin)-1):
+        #         num = 2 * num + int(bin[i])
+        #     num -= pow(2, len(bin)-1)
+        #     return num
+
+        num = -256;
+        if (len(bin) < 16):
+            num = int(bin, 2);
         else:
-            # print('here')
-            num = 0
-            for i in range(0, len(bin)-1):
-                num = 2 * num + int(bin[i])
-            num -= pow(2, len(bin)-1)
-            return num
+            num = int(bin[1:], 2);
+            if (bin[0] == '1'):
+                num -= 2 ** (len(bin) - 1)
+            
+        # if (bin[0] == '1'):
+        #     num -= 2 ** (len(bin));
+        return num;
+
         
     def sll(a, b):
         ans = a << b
@@ -82,7 +95,7 @@ class Alu:
     def alu(self, op1, op2, alucontrol):
         print('alucontrol is: ', alucontrol)
         if(type(op1) != type(1)):
-            print('type of op1 is', type(op1))
+            # print('type of op1 is', type(op1))
             op1 = self.binToInt(op1)
         if(type(op2) != type(1)):
             op2 = self.binToInt(op2)

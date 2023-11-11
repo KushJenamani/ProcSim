@@ -89,11 +89,11 @@ class Control:
                 case '000100':
                     # it is a beq
                     print('it is beq')
-                    return SignalsObject(regdst=False, regwrite= False, alusrc=False, alucontrol='0110', mem2reg=False, memread=False, memwrite=True, jump=False, branch=True)
+                    return SignalsObject(regdst=False, regwrite= False, alusrc=False, alucontrol='0110', mem2reg=False, memread=False, memwrite=False, jump=False, branch=True)
                 case '000101':
                     # it is a bne
                     print('it is bne')
-                    return SignalsObject(regdst=False, regwrite= False, alusrc=False, alucontrol='0110', mem2reg=False, memread=False, memwrite=True, jump=False, branch=True)
+                    return SignalsObject(regdst=False, regwrite= False, alusrc=False, alucontrol='0110', mem2reg=False, memread=False, memwrite=False, jump=False, branch=True)
                 case '000010':
                     # it is a j
                     return SignalsObject(regdst=False, regwrite=False, alusrc=False, alucontrol='0111', mem2reg=False, memread=False, memwrite=False, jump=True, branch=False)

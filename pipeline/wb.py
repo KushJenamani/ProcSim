@@ -12,8 +12,9 @@ class Wb:
                 self.result = self.inpipe.alures;
 
     def output(self):
-        if self.inpipe.signalsObject and self.inpipe.rd != 0:
-            self.regfile.write(self.inpipe.signalsObject.regdst, self.result, self.inpipe.rd);
+        if self.inpipe.signalsObject and self.inpipe.rd != 0 and self.inpipe.rd != '00000':
+            self.regfile.write(self.inpipe.signalsObject.regwrite, self.result, self.inpipe.rd);
+            self.regfile.write(regWrite = self.inpipe.signalsObject.regwrite, datain = self.result, a3 = self.inpipe.rd)
 
     def writeBack(self):
         self.input();
