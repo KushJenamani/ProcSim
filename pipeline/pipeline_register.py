@@ -8,6 +8,10 @@ class ifid:
         
         self.end = '000000';
 
+    def flush(self):
+        self.inst = '0' * 32;
+        self.pc_4 = 0;
+
 class idex:
     def __init__(self):
         self.signalsObject = default_object;

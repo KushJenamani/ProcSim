@@ -20,7 +20,7 @@ class Wb:
     def writeBack(self):
         self.input();
         self.output();
-        print('END GAME ALERT :::::::::::' + str(self.inpipe.end));
-        if ("1111111111111111111" in self.inpipe.end):
-            self.endCount += 1;
+        # print('END GAME ALERT :::::::::::' + str(self.inpipe.end));
+        # if ("1111111111111111111" in self.inpipe.end):
+        #     self.endCount += 1;
         return self.endCount;

@@ -33,6 +33,7 @@ class If ():
 
     def output(self):
         print('pc =', self.pc.get())
+        
         self.outpipe.inst = self.inst_mem.getInst(self.pc.get());
         print('instruction is: ', self.outpipe.inst)
         self.pc.set(self.pc.get() + 4);

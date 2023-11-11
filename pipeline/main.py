@@ -29,7 +29,7 @@ memWb = memwb();
 
 # create modules internals
 
-filename = 'mul_bytecode.txt'
+filename = 'mulbeq.txt'
 
 pc = PC(0);
 regfile = RegFile();
@@ -60,7 +60,7 @@ analyse = Analytics(if_mod, id, ex, mem, wb, ifId, idEx, exMem, memWb);
 # TAKE INPUTS
 print('Enter the number of elements to be sorted');
 # n = int(input())
-n = 2
+n = 4
 regfile.inputs(regWrite=True, a1 = 0, a2 = 0, a3 = 9, datain = n)
 regfile.write(True, n, 9)
 # n = 4
@@ -111,7 +111,9 @@ while (True):
         if_mod.fetch();
     except:
         pass
-
+    
+    
+    hazard_unit.detect();
     
     # inp = input()
     # if (inp == 'n'):
@@ -122,7 +124,7 @@ while (True):
     #     analyse.dumpPipes();
     
     print('END COUNT', end);
-    if (end >= 5):
+    if (ifId.inst == '0'*32 and exMem.inst == '0'*32 and idEx.inst == '0'*32 and memWb.inst == '0'*32):
         
         dataMem.printstuff();
         break;

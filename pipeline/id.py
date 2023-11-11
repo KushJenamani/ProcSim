@@ -51,6 +51,7 @@ class Id:
         
             self.outpipe.end = self.inpipe.end;
             self.outpipe.inst = self.inpipe.inst
+
     def decode(self):
         self.input();
 
@@ -61,4 +62,3 @@ class Id:
             self.rd2 = self.regfile.rd2();
 
         self.output();
-        self.hazard_unit.detect();
