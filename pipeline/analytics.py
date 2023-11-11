@@ -77,7 +77,7 @@ class Analytics:
             'rd':'---',
             'imm': '---',
             'jimm': '---',
-            'shamt':'---'
+            'shamt':'---',
         }
 
         if(opcode == '000000'):
@@ -144,6 +144,8 @@ class Analytics:
                     operation['rt'] = '---';
                     operation['rs'] = '---';
                     operation['jimm'] = self.binToInt(inst[6:32]);
+                case '011100':
+                    operation['name'] = 'mul';
                 case _:
                     print('that instruction does not exist')
                     print('opcode: ', opcode, 'func: ', func)
@@ -171,7 +173,7 @@ class Analytics:
 
 
         for i in range(7):
-            print(f"{fields[i]:<{6}} : ", end='');
+            print(f"{fields[i]:<{7}} : ", end='');
             for k, v in ops.items():
                 string = str(v[fields[i]]);
                 if (fields[i] == 'rs' or fields[i] == 'rt' or fields[i] == 'rd'):
@@ -179,7 +181,22 @@ class Analytics:
                 else:
                     print(f"{string:<{10}} | ", end="");
             print();
+        print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n');
 
+        pipes = [self.ifid, self.idex, self.exmem, self.memwb];
+        wish = ['rd1', 'rd2', 'alures', 'aluzero', 'imm', 'bta']
+
+        for w in wish:
+            print(f"{w:<{7}} : ", end='');
+            for p in pipes:
+                if hasattr(p, w):
+                    if (w == 'imm'):
+                        print(f"{str(self.binToInt(getattr(p, w))):<{10}} | ", end="");
+                    else:
+                        print(f"{str(getattr(p, w)):<{10}} | ", end='');
+                else:
+                    print(f"{'---':<{10}} | ", end="");
+            print();
         print('\n');
 
         

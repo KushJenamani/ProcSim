@@ -74,6 +74,10 @@ class Control:
         else:
             #it is not r type:
             match opcode:
+                case '011100':
+                    # it is mul
+                    print('mul')
+                    return SignalsObject(regdst=True, regwrite= True, alusrc=False, alucontrol='1110', mem2reg=False, memread=False, memwrite=False, jump=False, branch=False)
                 case '001000':
                     # it is addi
                     print('addi')

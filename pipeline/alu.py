@@ -85,6 +85,7 @@ class Alu:
         '0001': lambda a, b: a | b,
         '0111': f1, # this is set on less than
         '1111': f2,# this is sll
+        '1110': lambda a,b: a*b,
         2: lambda a, b: a * b,
         3: lambda a, b: a // b,
         4: lambda a, b: abs(a << b),

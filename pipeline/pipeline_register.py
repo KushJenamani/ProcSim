@@ -35,7 +35,7 @@ class exmem:
         self.bta = 0;           # BRANCH TARGET ADDRESS
 
         self.alures = 0;
-        self.aluzero = 0;
+        self.aluzero = False;       # If aluzero is true, we branch
         self.rd2 = 0;
 
         self.rd = 0;

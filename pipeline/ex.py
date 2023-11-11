@@ -28,6 +28,8 @@ class Ex:
                 self.rd2 = self.inpipe.imm;
             
             # ALU ACTION
+            if(self.inpipe.signalsObject.memwrite):
+                print("platuvaratnito ", self.rd1, self.rd2, "to the alu")
             self.res = self.alu.alu(self.rd1, self.rd2, self.inpipe.signalsObject.alucontrol);
             self.zero = self.alu.getzero();
 
