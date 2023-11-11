@@ -29,7 +29,7 @@ memWb = memwb();
 
 # create modules internals
 
-filename = 'mulbeq.txt'
+filename = 'fact_byte.txt'
 
 pc = PC(0);
 regfile = RegFile();
@@ -127,4 +127,5 @@ while (True):
     if (ifId.inst == '0'*32 and exMem.inst == '0'*32 and idEx.inst == '0'*32 and memWb.inst == '0'*32):
         
         dataMem.printstuff();
+        regfile.printstuff();
         break;

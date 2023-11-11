@@ -10,7 +10,7 @@ import os
 # note that rs is never used in shift left logical
 # note that if we have a binary string with starting bit as 1 then we need to treat it as 2s complement more times than not
 
-filename = 'bytecode.txt'
+filename = 'fact_byte.txt'
 # instantiate all objects
 datamem1  = memory.DataMemory();
 instmem1 = memory.InstMemory(filename); # now instruction memory has all the required instuctions
@@ -80,6 +80,22 @@ while True:
     # now I have the entire instruction in binary
     # let me look at the opcode and figure out what to do
     # i can get all the control signals using control.py
+    if(inst[26:32] == '001100' and inst[0:6] == '000000' ):
+        # it is a syscall
+        # we must look at value of $v0 and decide what to do
+        if(regfile1.getreg(2) == 5):
+            val = int(input())
+            # put val in $v0
+            regfile1.a3 = 2
+            regfile1.write(True, val)
+        elif(regfile1.getreg(2) == 10):
+            print('told us to exitt ')
+            exit(0)
+        else:
+            # not a defined syscall
+            print('undefined syscall\n')
+        pc1.set(pc1.get() + 4)
+        continue
     opcode = inst[0:6]
     rs = inst[6:11]
     rt = inst[11:16]
@@ -125,10 +141,17 @@ while True:
             continue
 
     elif so1.jump:
-        alu2 = Alu()
-        reqloc = alu2.binToInt('0000' + jimm + '00')
-        pc1.set(reqloc)
-        continue
+        if(opcode != '000000'):
+            # it is a jump
+            alu2 = Alu()
+            reqloc = alu2.binToInt('0000' + jimm + '00')
+            pc1.set(reqloc)
+            continue
+        else:
+            # it is a jr
+            reqloc = regfile1.rd1() # this is a value(numeric)
+            pc1.set(reqloc)  # this is a value(numeric)
+            continue
     else:
         if(opcode == '000000' and func == '000000'):
             # it is a sll
