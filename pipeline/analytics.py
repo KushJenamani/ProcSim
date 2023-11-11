@@ -49,6 +49,9 @@ class Analytics:
     def binToInt(self, bin:str):
         factor = 1
         #treat all immidiates as signed 2s complement and opcodes and other stuff as unsigned
+        if (type(bin) == type(1)):
+            print("bin to int got an integer");
+            return bin;
         
         if (bin[0] != '1' or len(bin) < 16):
             factor = +1  # changes made here
@@ -146,6 +149,7 @@ class Analytics:
                     operation['jimm'] = self.binToInt(inst[6:32]);
                 case '011100':
                     operation['name'] = 'mul';
+                    operation['rd'] = self.binToInt(inst[16:21]);
                 case _:
                     print('that instruction does not exist')
                     print('opcode: ', opcode, 'func: ', func)
@@ -184,7 +188,7 @@ class Analytics:
         print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n');
 
         pipes = [self.ifid, self.idex, self.exmem, self.memwb];
-        wish = ['rd1', 'rd2', 'alures', 'aluzero', 'imm', 'bta']
+        wish = ['rd1', 'rd2', 'alures', 'aluzero', 'imm', 'bta', 'rd']
 
         for w in wish:
             print(f"{w:<{7}} : ", end='');
@@ -192,6 +196,8 @@ class Analytics:
                 if hasattr(p, w):
                     if (w == 'imm'):
                         print(f"{str(self.binToInt(getattr(p, w))):<{10}} | ", end="");
+                    elif (w == 'rd'):
+                        print(f"{str(self.binToInt(getattr(p, w))) + ' = ' + str(self.regmap[self.binToInt(getattr(p, w))]):<{10}} | ", end="");
                     else:
                         print(f"{str(getattr(p, w)):<{10}} | ", end='');
                 else:

@@ -33,6 +33,7 @@ class DataMemory:
 
 #Start from 4194304
 class InstMemory:
+    blasphemy = 0
     mem = {}
     def __init__(self, filename):
         file = open(filename)
@@ -47,7 +48,10 @@ class InstMemory:
         if (pc in self.mem):
             return self.mem[pc];
         else:
-            return '1' * 32;
+            self.blasphemy += 1;
+            if (self.blasphemy >= 5):
+                exit('anything');
+            return '0' * 32;
 
     
         

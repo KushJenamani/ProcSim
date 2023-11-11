@@ -6,8 +6,7 @@ class ifid:
         self.pc_4 = 0;
         self.inst = '0' * 32;
         
-
-        self.end = False;
+        self.end = '000000';
 
 class idex:
     def __init__(self):
@@ -24,7 +23,7 @@ class idex:
         self.rt = 0;
         self.rd = 0;
 
-        self.end = False;
+        self.end = '000000';
 
     
 
@@ -38,18 +37,18 @@ class exmem:
         self.aluzero = False;       # If aluzero is true, we branch
         self.rd2 = 0;
 
-        self.rd = 0;
+        self.rd = '00000';
 
-        self.end = False;
+        self.end = '000000';
         
 
 class memwb:
     def __init__(self):
         self.signalsObject = default_object;
         self.inst = '0' * 32;
-        self.rd = 0;
+        self.rd = '00000';
         self.inst = ''
         self.memres = 0;
         self.alures = 0;
 
-        self.end = False;
+        self.end = '000000';

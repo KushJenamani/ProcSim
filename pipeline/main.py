@@ -62,6 +62,7 @@ print('Enter the number of elements to be sorted');
 # n = int(input())
 n = 2
 regfile.inputs(regWrite=True, a1 = 0, a2 = 0, a3 = 9, datain = n)
+regfile.write(True, n, 9)
 # n = 4
 
 # inp = [4, 3, 6, 8]
@@ -72,11 +73,12 @@ print("Enter the starting address for input");
 # start_addr = int(input())
 start_addr = 4
 regfile.inputs(regWrite = True, a1 = 0, a2 = 0, a3 = 10, datain  = start_addr)
+regfile.write(True, start_addr, 10)
 print("Enter the output address");
 # end_addr = int(input());
 end_addr = 24
 regfile.inputs(regWrite = True, a1 = 0, a2 = 0, a3 = 11, datain  = end_addr)
-
+regfile.write(True, end_addr, 11)
 print("enter the numbers to be sorted\n")
 for i in range(n):
     a = int(input());
@@ -98,6 +100,8 @@ pc.set(4194304)  # initialize pc to the first instruction in codespace
 
 # EXECUTE
 while (True):
+    
+    forward_unit.forward();
     end = wb.writeBack();
     mem.access();
     ex.execute();
@@ -109,12 +113,16 @@ while (True):
         pass
 
     
-    inp = input()
-    if (inp == 'n'):
-        continue
-    elif (inp == 's'):
-        analyse.dumpPipes();
-    elif (inp == 'c'):
-        analyse.dumpPipes();
-    if (end):
+    # inp = input()
+    # if (inp == 'n'):
+    #     continue
+    # elif (inp == 's'):
+    #     analyse.dumpPipes();
+    # elif (inp == 'c'):
+    #     analyse.dumpPipes();
+    
+    print('END COUNT', end);
+    if (end >= 5):
+        
+        dataMem.printstuff();
         break;

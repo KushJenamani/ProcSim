@@ -3,6 +3,7 @@ class Wb:
     def __init__(self, regfile, inpipe):
         self.regfile = regfile;
         self.inpipe = inpipe;
+        self.endCount = 0;
 
     def input(self):
         if self.inpipe.signalsObject:
@@ -20,4 +21,6 @@ class Wb:
         self.input();
         self.output();
         print('END GAME ALERT :::::::::::' + str(self.inpipe.end));
-        return self.inpipe.end;
+        if ("1111111111111111111" in self.inpipe.end):
+            self.endCount += 1;
+        return self.endCount;

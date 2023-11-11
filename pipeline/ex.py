@@ -13,7 +13,6 @@ class Ex:
 
     def input(self):
         if self.inpipe.signalsObject:
-            self.funit.forward();
 
             self.rd1 = self.inpipe.rd1;
             self.rd2 = self.inpipe.rd2;
@@ -59,7 +58,7 @@ class Ex:
             self.outpipe.rd = self.rd;
         
             self.outpipe.end = self.inpipe.end;
-            print('ex done for', self.inpipe)
+            print('ex done for', self.inpipe.inst)
             self.outpipe.inst = self.inpipe.inst
 
     def execute(self):
